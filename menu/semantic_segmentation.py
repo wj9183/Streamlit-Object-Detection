@@ -45,7 +45,6 @@ def semantic_segmentation():
         IMG_OUTPUT_SHAPE_END = 4
         classes_num, h, w = cv_enet_model_output.shape[IMG_OUTPUT_SHAPE_START : IMG_OUTPUT_SHAPE_END]
 
-        ## 중요2 모델의 아웃풋 20개 행렬을, 하나의 행렬로 만든다.
         class_map = np.argmax(cv_enet_model_output[0], axis = 0)
 
         CV_ENET_SHAPE_IMG_COLORS = open('models/enet/saved_model/enet-colors.txt').read().split('\n')
