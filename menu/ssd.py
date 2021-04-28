@@ -113,23 +113,26 @@ from object_detection.utils import visualization_utils as vis_util
 
 
 def ssd_image():
-    pass
-#   image_files = st.file_uploader("이미지 파일 업로드", type = ['png', 'jpeg', 'jpg'], accept_multiple_files=True)
-
-#   if image_files is not None:
     
-#     model = keras.models.load_model("./models/ssd/saved_model/")
-#     for image_file in image_files:
-#       show_inference(model, image_file)
+  image_files = st.file_uploader("이미지 파일 업로드", type = ['png', 'jpeg', 'jpg'], accept_multiple_files=True)
+
+  if image_files is not None:
+    
+    model = keras.models.load_model("./models/ssd/saved_model/")
+    for image_file in image_files:
+      show_inference(model, image_file)
 
 
 
 
-# def ssd_video():
-    # video_file1 = open('test_data/dashcam2.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
-    # st.video(video_file)
+def ssd_video():
+    st.write("원본")
+    video_file_origin = open('test_data/videos/dashcam2.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
+    st.video(video_file_origin)
 
-    # video_file_
+    st.write("Object Detection")
+    video_file_convert = open('test_data/videos/output3.avi', 'rb').read()
+    st.video(video_file_convert)
 
   #보류      
 
