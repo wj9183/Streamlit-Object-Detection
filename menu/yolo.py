@@ -72,7 +72,7 @@ def detect_image( image, yolo, all_classes):
     return image
 
 
-def yolo():
+def yolo_image():
     yolo = YOLO(0.6, 0.5)
 
     all_classes = get_classes('models/yolo/data/coco_classes.txt')
@@ -86,3 +86,13 @@ def yolo():
 
             result_image = detect_image(image_np, yolo, all_classes)
             st.image(result_image)
+
+def yolo_video():
+    st.header("원본")
+    video_file_origin = open('test_data/videos/origin3.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
+    st.video(video_file_origin)
+
+    if st.button('변환'):
+        st.header("Object Detection")
+        video_file_convert = open('test_data/videos/convert3.mp4', 'rb').read()
+        st.video(video_file_convert)    

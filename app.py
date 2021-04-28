@@ -1,7 +1,7 @@
 import streamlit as st
 from menu.introduce import introduce
 from menu.ssd import ssd_image, ssd_video
-from menu.yolo import yolo
+from menu.yolo import yolo_image, yolo_video
 from menu.semantic_segmentation import semantic_segmentation
 
 def main():
@@ -21,7 +21,13 @@ def main():
             ssd_video()
 
     elif choice == 'YOLO':
-        yolo()
+        option_list = ['Image', 'Video']
+        option = st.selectbox('옵션을 선택하세요.', option_list)
+        if option == 'Image':
+            yolo_image()
+ 
+        elif option == 'Video':
+            yolo_video()
     
     elif choice == 'Semantic Segmentation':
         semantic_segmentation()
