@@ -8,9 +8,7 @@ from models.yolo.saved_model.yolo_model import YOLO
 
 
 def process_image(img):
-  """ 이미지 리사이즈하고, 차원 확장
-  img : 원본 이미지
-  결과는 (64, 64, 3)으로 프로세싱된 이미지 반환 """
+
 
   image_org = cv2.resize(img, (416, 416), interpolation = cv2.INTER_CUBIC)
   image_org = np.array(image_org, dtype = 'float32')
@@ -21,8 +19,7 @@ def process_image(img):
 
 
 def get_classes(file):
-    """클래스의 이름을 가져온다.
-        리스트로 클래스 이름을 반환한다. """
+
     with open(file) as f : 
         name_of_class = f.readlines()
 
@@ -31,11 +28,7 @@ def get_classes(file):
     return name_of_class
 
 def box_draw(image, boxes, scores, classes, all_classes):
-    """ image : 오리지날 이미지
-        boxes : 오브젝트의 박스데이터, ndarray
-        classes : 오브젝트의 클래스 정보, ndarray
-        scores : 오브젝트의 확률, ndarray
-        all_classes : 모든 클래스 이름 """
+
 
     for box, score, cl in zip(boxes, scores, classes):
         x, y, w, h = box
@@ -58,11 +51,7 @@ def box_draw(image, boxes, scores, classes, all_classes):
     print()
 
 def detect_image( image, yolo, all_classes):
-    """ image : 오리지날 이미지
-    yolo : 욜로 모델
-    all_classes : 전체 클래스 이름.
 
-    변환된 이미지 리턴!"""
 
     pimage = process_image(image)
     #3개를 예측해준다.
@@ -88,6 +77,12 @@ def yolo_image():
             st.image(result_image)
 
 def yolo_video():
+    st.title("YOLO model")
+    st.markdown("##### ※AWS ec2의 프리티어 인스턴스 성능상 상호작용 가능한 형태로 구현 불가능하여 영상으로 대체되었습니다.")
+    video_file_origin = open('menu/test_video/yolo_test_video_1.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
+    st.video(video_file_origin)
+
+
     st.header("원본")
     video_file_origin = open('test_data/videos/origin3.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
     st.video(video_file_origin)

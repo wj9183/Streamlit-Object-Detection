@@ -1,5 +1,6 @@
 models/yolo/saved_model/yolo.h5
 test_data/
+menu/test_video/
 
 
 

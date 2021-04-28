@@ -107,9 +107,30 @@ def show_inference(model, image_file):
   scaleX = 0.6
   scaleY = 0.6
   image_np_bgr_resize = cv2.resize(image_np_bgr, None, fx = scaleX, fy=scaleY, interpolation = cv2.INTER_LINEAR)
-  # st.write(image_np_bgr_resize)
-  # st.image(cv2.imshow("hand_{}".format(image_path), image_np_bgr_resize))
   st.image(image_np_bgr_resize)
+
+
+
+
+def about_ssd():
+    st.title("About SSD")
+    script_what_is_ssd_1 = """SSD는 Single Shot Detector의 줄임말로, 실시간 물체 감지를 목적으로 설계된 모델입니다.     
+                            동시에, 정확성에서 높은 성능을 보이는 Faster R-CNN에 앞서는 정확성도 가지고 있습니다.
+                            """
+    st.write(script_what_is_ssd_1)
+    st.image("script/inference.png")
+
+    script_what_is_ssd_2 = """ssd는 multi scale feature와 default box를 사용하고 이미지의 해상도를 떨어 뜨려 속도를 향상시켰습니다.
+                                이를 통해 SSD는 손실 없는 높은 정확도로 물체를 감지할 수 있습니다."""
+    st.write(script_what_is_ssd_2)
+    st.image("script/ssd_layers.jpeg")
+    script_what_is_ssd_3 = """ssd의 핵심이 되는 아이디어는, Feature Map이 Convolution 연산을 거치면서 크기가 점점 작아진다는 점을 이용한 것입니다.
+                            RPN에서 Anchor라고 부르는 것과 같은 기능을 하는 Default Box라는 것을 두고,
+                            큰 Feature Map에서는 작은 물체를 검출하고, 작은 Feature Map에서는 큰 물체를 검출하는 것입니다."""
+    st.write(script_what_is_ssd_3)
+
+
+
 
 
 def ssd_image():
@@ -126,6 +147,12 @@ def ssd_image():
 
 
 def ssd_video():
+    st.title("Videos Object detection with SSD model")
+    st.markdown("##### ※AWS ec2의 프리티어 인스턴스 성능상 상호작용 가능한 형태로 구현 불가능하여 영상으로 대체되었습니다.")
+    video_file_origin = open('menu/test_video/ssd_test_video_1.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
+    st.video(video_file_origin)
+    
+    
     st.header("원본")
     video_file_origin = open('test_data/videos/origin1.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
     st.video(video_file_origin)
@@ -134,49 +161,3 @@ def ssd_video():
         st.header("Object Detection")
         video_file_convert = open('test_data/videos/convert1.mp4', 'rb').read()
         st.video(video_file_convert)
-
-  #보류      
-
-  # model = keras.models.load_model("./models/ssd_mobilenet_v2_320x320_coco17_tpu-8/saved_model/")
-
-  # st.write("으아아비디오")
-  # directory = "./data/videos"
-  # video_file = st.file_uploader("동영상 파일 업로드", type = ['mp4'], accept_multiple_files=False)
-  # # save_uploaded_file(directory, video_file)
-  # if video_file is not None:
-  #   # st.video(video_file)
-  #       #mp4 비디오 파일에서 읽어오는 것
-  #   cap = cv2.VideoCapture('data/videos/library1.mp4')
-    
-  #   #앞으로 교수님이 체크코드를 빼도 우리는 체크를 알아서 해라
-  #   if cap.isOpened() == False:
-  #       print("Error opening video stream or file")
-
-  #   else:
-  #     box = st.empty()
-  #     #반복문이 필요한 이유? 비디오는 여러 사진으로 구성되어있으니까.
-  #     #여러개니까!
-  #     ret, frame = cap.read()
-  #     while ret:
-  #           #사진을 한장씩 가져와서, True 또는 False, 넘파이어레이를 변수에 저장.
-  #         #제대로 사진을 가져왔으면 화면에 표시한다.
-  #         if ret == True:
-  #             box.image(frame, channels="BGR")
-  #             # start_time = time.time()
-  #             # show_inference(model, frame)
-  #             # cv2.imshow("Frame", frame)
-  # #             end_time = time.time()
-  # #             print(end_time - start_time)  
-  # #             # 키보드에서 esc키를 누르면 exit하라는 것.
-  # #             #실무에서 사용안한다. 알 필요 없는데 이건 확인용이니까.
-  # #             #분석할 가치가 없고 로직도 상관없다.
-  #             if cv2.waitKey(25) & 0xFF == 27:
-  #                 break
-
-  #         else:
-  #             break 
-
-  #       #데이터베이스의 커서,커넥션 close와 같은 것.
-  # cap.release()
-
-  # cv2.destroyAllWindows()
