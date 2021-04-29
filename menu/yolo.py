@@ -64,43 +64,65 @@ def detect_image( image, yolo, all_classes):
 
 
 def about_yolo():
-    text1 = """
-        여러 개의 오브젝트를 감지할 수 있게 하려면 어떻게 학습시켜야할까요?
-        이미지를 grid로 나눕니다.
-        영역(grid cell)을 구분하면 영역 별로 결과가 나옵니다. 벡터가 여러 개 나온다는 겁니다.
-        최대로 그 영역의 갯수만큼 물체를 감지할 수 있게 되는 겁니다.
-        이제 한 이미지에 대한 y의 값이 (이미지의 가로*세로) * 벡터에 들어있는 정보 갯수 만큼 나옵니다.
-        CNN을 마친 결과도 같은 모양으로 나옵니다."""
+    text1 = """ 
+        여러 개의 오브젝트를 감지할 수 있게 하려면 어떻게 학습시켜야할까요? 
+        이미지를 grid로 나눕니다.   
+        영역(grid cell)을 구분하면 영역 별로 결과가 나옵니다. 벡터가 여러 개 나온다는 겁니다.   
+        최대로 그 영역의 갯수만큼 물체를 감지할 수 있게 되는 겁니다.    
+        이제 한 이미지에 대한 y의 값이 (이미지의 가로 X 세로) X 벡터에 들어있는 정보 갯수 만큼 나옵니다.  
+        CNN을 마친 결과도 같은 모양으로 나옵니다.   """
 
 
 
 
-        # """여기서 의문이 들 수 있습니다.
-        # 하나의 오브젝트가 여러 cell에 걸쳐있어서 bounding box가 여러 개 그려지게 되면 어떻게 해결해야할까요?
-        # 벡터의 맨 첫 번째 값(pc)으로 가장 큰 값이 있는 바운딩 박스만 남겨놓습니다.
-        # 그런데 또 문제가 있습니다. 그럼 한 이미지에서 같이 감지된 다른 물체는 bounding box가 지워질 수 있습니다.
-        # 물체 별로 가장 큰 값을 남겨둬야합니다.
-        # 물체 별로는 어떤 지표로 구분할까요.
-        # 그래서 만들어진 지표가 IOU(=Intersection over union)입니다.
-        # 바운딩 박스 간의 교집합 영역의 넓이 ÷ 합집합의 영역의 넓이입니다.
-        # 간단히 말해서 그냥 겹치는 부분이 많은지 적은지 정도를 나타내는 것입니다.
-        # IOU 값이 클수록 같은 물체일 가능성이 큽니다.
-        # IOU가 높은 사각형들 중 pc값이 큰 것만 남기고 작은 것들은 싹 지우는 겁니다.
-        # 이걸 Non max suppression이라고 합니다.
+    text2 = """ 
+        하나의 오브젝트가 여러 cell에 걸쳐있어서 bounding box가 여러 개 그려지게 되면 어떻게 해결해야할까요?    
+        벡터의 맨 첫 번째 값(pc)으로 가장 큰 값이 있는 바운딩 박스만 남겨놓습니다.  
+        그런데 또 문제가 있습니다.  
+        그럼 한 이미지에서 같이 감지된 다른 물체는 bounding box가 지워질 수 있습니다.    
+        물체 별로 가장 큰 값을 남겨둬야합니다. 물체 별로는 어떤 지표로 구분할까요. """
+        
+    text3 = """
+        그래서 만들어진 지표가 IOU(=Intersection over union)입니다.  
+        바운딩 박스 간의 교집합 영역의 넓이 ÷ 합집합의 영역의 넓이입니다.   
+        간단히 말해서 그냥 겹치는 부분이 많은지 적은지 정도를 나타내는 것입니다.    
+        IOU 값이 클수록 같은 물체일 가능성이 큽니다.    
+        IOU가 높은 사각형들 중 pc값이 큰 것만 남기고 작은 것들은 싹 지우는 겁니다.  
+        이걸 Non max suppression이라고 합니다.  """
 
-        # 그럼 하나의 grid에 여러 개의 오브젝트 중심이 있으면 어떻게 할까요?
-        # 하나의 cell에 object가 1개 있을 거라는 전제하에 벡터 안에 들어있는 정보가 7개였습니다.
-        # 이걸 늘려주면 됩니다.
-        # 벡터 여러개를 하나의 벡터로 처리해주면 됩니다. 이걸 Anchor boxes 라고 합니다.
-        # 하나의 셀에 물체가 2개 감지될 수 있다고 합시다.
-        # 하나의 cell에 2개의 벡터를 만듭니다. 그걸로 학습을 시킵니다.
-        # grid cell이 총 3x3으로 9개였다면, 3x3x7이 아닌 3x3x14가 됩니다.
-        # 이것이 YOLO입니다."""
+    text4 = """
+            그럼 하나의 grid에 여러 개의 오브젝트 중심이 있으면 어떻게 할까요?  
+            벡터 여러개를 하나의 벡터로 처리해주면 됩니다. 이걸 Anchor boxes 라고 합니다.
+            하나의 셀에 물체가 2개 감지될 수 있다고 합시다.
+            하나의 cell에 2개의 벡터를 만듭니다. 그걸로 학습을 시킵니다.
+            이렇게 만들어진 것이 YOLO입니다."""
 
+    blank = """ """
     st.title("YOLO")
-    st.image('script/YOLO1.JPG')
     st.write(text1)
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)
+    st.image('script/YOLO1.JPG')
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)    
+    st.write(text2)
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)
+    st.image('script/IOU1.png')
+    st.image('script/IOU2.png')
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)    
+    st.write(text3)
 
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)    
+    st.image('script/anchor.png')
+    st.write(text4)
 
 
 
