@@ -159,7 +159,7 @@ def yolo_video():
     st.write(blank)
 
     menu = ['원본 영상', 'Object Detection']
-    select = st.radio("메뉴를 골라주세요.", menu)
+    select = st.sidebar.radio("메뉴를 골라주세요.", menu)
 
     if select == '원본 영상':
         st.header("원본 영상")
