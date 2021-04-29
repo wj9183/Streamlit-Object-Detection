@@ -13,6 +13,7 @@ import tarfile
 import tensorflow as tf
 import zipfile
 import time
+import webbrowser
 
 from collections import defaultdict
 from io import StringIO
@@ -22,6 +23,8 @@ from PIL import Image
 from object_detection.utils import ops as utils_ops
 from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
+
+
 
 
 utils_ops.tf = tf.compat.v1
@@ -115,24 +118,84 @@ def show_inference(model, image_file):
 def about_ssd():
     st.title("About SSD")
     script_what_is_ssd_1 = """
-                            SSD는 Single Shot Detector의 줄임말로, 실시간 물체 감지를 목적으로 설계된 모델입니다. 
-                            SSD가 등장하기 전까지 많이 사용되던 대표적인 detector는 Faster R-CNN이였습니다.   
-                            동시에, 정확성에서 높은 성능을 보이는 Faster R-CNN에 앞서는 정확성도 가지고 있습니다.
+                              SSD는 YOLO보다 1년 가량 먼저 만들어졌습니다.  
+                              YOLO가 SSD를 많이 차용하여, 서로 닮은 부분이 많습니다.  
+                              성능도 각자 버전을 업데이트를 거듭하면서 우열관계가 뒤집히길 반복했습니다."""
+
+    script_what_is_ssd_2 ="""
+                              SSD의 핵심은 Image pyramid에 있습니다.  
+                              한 번 CNN하는 과정에서 전부 Image Pyramid로 처리합니다.   
+                              그에 반해 Sliding window는 느립니다.  
+                              Image Pyramid를 만들어두고 각 이미지를 다 CNN 해야하기 때문입니다."""
+                              
+    script_what_is_ssd_3 ="""
+                              CNN 과정을 먼저 생각해봅니다. 
+                              여러 개의 커널(피쳐)들이 이미지를 Convolution합니다.  
+                              그러면서 이미지 사이즈가 작아지고, 이미지가 커널의 갯수만큼 많아집니다. 
+                              Convolution을 했으니 이제 Activation을 하고, Pooling을 합니다.  
+                              그럼 또 이미지 사이즈가 줄어듭니다. 
+                              위 과정을 반복하다보면, 이미지가 계속해서 작아집니다."""
+
+
+
+    script_what_is_ssd_4 ="""
+                              Image Pyramid를 굳이 만들지 않아도, CNN 과정에 이미 포함되어있다는 것입니다.  
+                              이미지 사이즈가 축소가 된다는 건, 이미지가 확대된다는 것과 같은 의미입니다.  
+                              말이 참 모순적인데, 커널 사이즈는 그대로이기 때문입니다.  
+                              이미지가 작아지면 이미지 안에 있던 물체가 똑같은 커널의 한 프레임 안에 다 들어올 수 있게 됩니다."""
+
+
+    script_what_is_ssd_5 ="""
+                              CNN의 과정을 똑같이 하면서,
+                              Convolution을 하고 Pooling을 할 때 그 모든 결과를 모읍니다.
+                              엄청나게 많은 결과가 나옵니다.
+
+                              YOLO와 같이, Bounding box가 엄청 많이 나오게 될 겁니다.
+                              Pc가 가장 큰 값으로 NMS(Non max suppression) 해서, 각 오브젝트마다 하나씩의 Bounding box만 남깁니다.
+                              여기까지가 ssd의 알고리즘입니다.
+
+                              정리하면 ssd는, image pyramid를 CNN의 본래 convolution하는 과정에 자연스럽게 넣어서,
+                              여러개의 이미지 확대 효과를 본 걸 grid cell 나눠서 object를 detection한 것입니다.
                             """
-    st.write(script_what_is_ssd_1)
     st.image("script/inference.png")
+    
+    st.write(script_what_is_ssd_1)
+    blank = """ """
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)
 
-    script_what_is_ssd_2 = """ssd는 multi scale feature와 default box를 사용하고 이미지의 해상도를 떨어 뜨려 속도를 향상시켰습니다.
-                                이를 통해 SSD는 손실 없는 높은 정확도로 물체를 감지할 수 있습니다."""
+    st.image("script/pyramid.png")
     st.write(script_what_is_ssd_2)
-    st.image("script/ssdarchitecture.png")
-    script_what_is_ssd_3 = """ssd의 핵심이 되는 아이디어는, Feature Map이 Convolution 연산을 거치면서 크기가 점점 작아진다는 점을 이용한 것입니다.
-                            RPN에서 Anchor라고 부르는 것과 같은 기능을 하는 Default Box라는 것을 두고,
-                            큰 Feature Map에서는 작은 물체를 검출하고, 작은 Feature Map에서는 큰 물체를 검출하는 것입니다."""
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)
+
+    st.image("script/pooling.png")
+
     st.write(script_what_is_ssd_3)
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)
 
+    st.image("script/ssdarchitecture.png")
+    st.write(script_what_is_ssd_4)
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)
+    st.image("script/NMS.png")
+    st.write(script_what_is_ssd_5)
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)
+    st.write(blank)    
+    url = 'https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md'
 
-
+    if st.button('TensorFlow 2 Detection Model Zoo'):
+        webbrowser.open_new_tab(url)
+    st.markdown('##### 버튼을 누르면 TensorFlow 2 Detection Model Zoo로 이동합니다.')
 
 
 # def ssd_image():
@@ -149,11 +212,10 @@ def about_ssd():
 
 
 def ssd_video():
-    st.title("SSD")
-    st.markdown("###### ※AWS ec2의 프리티어 인스턴스 성능상 상호작용 가능한 형태로 구현 불가능하여 영상으로 대체되었습니다.")
+    st.title("SSD 실행 영상")
     video_file_origin = open('menu/test_video/ssd_test_video_1.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
     st.video(video_file_origin)
-    
+    st.markdown("""###### ※본 영상은 직접 촬영한 영상입니다. AWS ec2의 프리티어 인스턴스 성능상 상호작용 가능한 형태로 구현 불가능하여 영상으로 대체되었습니다. 왼쪽 사이드바에서 메뉴를 선택해주세요.""")
     blank = """ """
     st.write(blank)
     st.write(blank)
