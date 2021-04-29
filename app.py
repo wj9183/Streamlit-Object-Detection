@@ -1,7 +1,7 @@
 import streamlit as st
 from menu.introduce import introduce
-from menu.ssd import ssd_image, ssd_video, about_ssd
-from menu.yolo import yolo_image, yolo_video, about_yolo
+from menu.ssd import ssd_video, about_ssd
+from menu.yolo import yolo_video, about_yolo
 from menu.semantic_segmentation import semantic_segmentation
 
 def main():

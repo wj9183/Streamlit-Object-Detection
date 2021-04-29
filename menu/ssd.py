@@ -133,15 +133,15 @@ def about_ssd():
 
 
 
-def ssd_image():
+# def ssd_image():
     
-  image_files = st.file_uploader("이미지 파일 업로드", type = ['png', 'jpeg', 'jpg'], accept_multiple_files=True)
+#   image_files = st.file_uploader("이미지 파일 업로드", type = ['png', 'jpeg', 'jpg'], accept_multiple_files=True)
 
-  if image_files is not None:
+#   if image_files is not None:
     
-    model = keras.models.load_model("./models/ssd/saved_model/")
-    for image_file in image_files:
-      show_inference(model, image_file)
+#     model = keras.models.load_model("./models/ssd/saved_model/")
+#     for image_file in image_files:
+#       show_inference(model, image_file)
 
 
 
