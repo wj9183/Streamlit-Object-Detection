@@ -9,6 +9,13 @@ import streamlit as st
 from PIL import Image
 
 
+def about_semantic_segmentation():
+    pass
+
+
+
+
+
 
 
 def semantic_segmentation_image():
