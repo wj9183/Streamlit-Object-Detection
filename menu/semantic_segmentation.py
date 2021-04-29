@@ -10,7 +10,7 @@ from PIL import Image
 
 
 def about_semantic_segmentation():
-    pass
+    st.write('enet model')
 
 
 
