@@ -114,7 +114,9 @@ def show_inference(model, image_file):
 
 def about_ssd():
     st.title("About SSD")
-    script_what_is_ssd_1 = """SSD는 Single Shot Detector의 줄임말로, 실시간 물체 감지를 목적으로 설계된 모델입니다.     
+    script_what_is_ssd_1 = """
+                            SSD는 Single Shot Detector의 줄임말로, 실시간 물체 감지를 목적으로 설계된 모델입니다. 
+                            SSD가 등장하기 전까지 많이 사용되던 대표적인 detector는 Faster R-CNN이였습니다.   
                             동시에, 정확성에서 높은 성능을 보이는 Faster R-CNN에 앞서는 정확성도 가지고 있습니다.
                             """
     st.write(script_what_is_ssd_1)
@@ -123,7 +125,7 @@ def about_ssd():
     script_what_is_ssd_2 = """ssd는 multi scale feature와 default box를 사용하고 이미지의 해상도를 떨어 뜨려 속도를 향상시켰습니다.
                                 이를 통해 SSD는 손실 없는 높은 정확도로 물체를 감지할 수 있습니다."""
     st.write(script_what_is_ssd_2)
-    # st.image("script/ssd_layers.jpeg")
+    st.image("script/ssdarchitecture.png")
     script_what_is_ssd_3 = """ssd의 핵심이 되는 아이디어는, Feature Map이 Convolution 연산을 거치면서 크기가 점점 작아진다는 점을 이용한 것입니다.
                             RPN에서 Anchor라고 부르는 것과 같은 기능을 하는 Default Box라는 것을 두고,
                             큰 Feature Map에서는 작은 물체를 검출하고, 작은 Feature Map에서는 큰 물체를 검출하는 것입니다."""

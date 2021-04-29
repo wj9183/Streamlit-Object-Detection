@@ -13,7 +13,7 @@ def main():
         introduce()
     elif choice == 'SSD':
         option_list = ['About SSD', 'Video']
-        option = st.selectbox('옵션을 선택하세요.', option_list)
+        option = st.sidebar.selectbox('옵션을 선택하세요.', option_list)
         # if option == 'Image':
         #     ssd_image()
         if option == 'Video':
@@ -23,7 +23,7 @@ def main():
 
     elif choice == 'YOLO':
         option_list = ['About YOLO', 'Video']
-        option = st.selectbox('옵션을 선택하세요.', option_list)
+        option = st.sidebar.selectbox('옵션을 선택하세요.', option_list)
         # if option == 'Image':
         #     yolo_image()
         if option == 'Video':
@@ -33,7 +33,7 @@ def main():
     
     elif choice == 'Semantic Segmentation':
         option_list = ['About Semantic Segmentation', 'Video', 'Image']
-        option = st.selectbox('옵션을 선택하세요.', option_list)
+        option = st.sidebar.selectbox('옵션을 선택하세요.', option_list)
         if option == 'Image':
             semantic_segmentation_image()
         if option == 'Video':
