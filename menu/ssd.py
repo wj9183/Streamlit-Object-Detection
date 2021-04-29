@@ -123,7 +123,7 @@ def about_ssd():
     script_what_is_ssd_2 = """ssd는 multi scale feature와 default box를 사용하고 이미지의 해상도를 떨어 뜨려 속도를 향상시켰습니다.
                                 이를 통해 SSD는 손실 없는 높은 정확도로 물체를 감지할 수 있습니다."""
     st.write(script_what_is_ssd_2)
-    st.image("script/ssd_layers.jpeg")
+    # st.image("script/ssd_layers.jpeg")
     script_what_is_ssd_3 = """ssd의 핵심이 되는 아이디어는, Feature Map이 Convolution 연산을 거치면서 크기가 점점 작아진다는 점을 이용한 것입니다.
                             RPN에서 Anchor라고 부르는 것과 같은 기능을 하는 Default Box라는 것을 두고,
                             큰 Feature Map에서는 작은 물체를 검출하고, 작은 Feature Map에서는 큰 물체를 검출하는 것입니다."""
@@ -148,7 +148,7 @@ def ssd_image():
 
 def ssd_video():
     st.title("Videos Object detection with SSD model")
-    st.markdown("##### ※AWS ec2의 프리티어 인스턴스 성능상 상호작용 가능한 형태로 구현 불가능하여 영상으로 대체되었습니다.")
+    st.markdown("###### ※AWS ec2의 프리티어 인스턴스 성능상 상호작용 가능한 형태로 구현 불가능하여 영상으로 대체되었습니다.")
     video_file_origin = open('menu/test_video/ssd_test_video_1.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
     st.video(video_file_origin)
     
