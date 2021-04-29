@@ -12,7 +12,7 @@ def main():
     if choice == 'Object Detection':
         introduce()
     elif choice == 'SSD':
-        option_list = ['About SSD', 'Image', 'Video']
+        option_list = ['About SSD', 'Video']
         option = st.selectbox('옵션을 선택하세요.', option_list)
         # if option == 'Image':
         #     ssd_image()
@@ -22,7 +22,7 @@ def main():
             about_ssd()
 
     elif choice == 'YOLO':
-        option_list = ['About YOLO', 'Image', 'Video']
+        option_list = ['About YOLO', 'Video']
         option = st.selectbox('옵션을 선택하세요.', option_list)
         # if option == 'Image':
         #     yolo_image()
