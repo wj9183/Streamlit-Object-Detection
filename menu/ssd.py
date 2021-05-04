@@ -212,28 +212,24 @@ def about_ssd():
 
 
 def ssd_video():
-    st.title("SSD 실행 영상")
-    video_file_origin = open('menu/test_video/ssd_test_video_1.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
-    st.video(video_file_origin)
-    st.markdown("""###### ※본 영상은 직접 촬영한 영상입니다. AWS ec2의 프리티어 인스턴스 성능상 상호작용 가능한 형태로 구현 불가능하여 영상으로 대체되었습니다. 왼쪽 사이드바에서 메뉴를 선택해주세요.""")
-    blank = """ """
-    st.write(blank)
-    st.write(blank)
-    st.write(blank)
-    st.write(blank)
-    st.write(blank)
-    st.write(blank)
-    st.write(blank)
 
-    menu = ['원본 영상', 'Object Detection']
+    menu = ['SSD Test 영상','원본 영상', 'Object Detection']
     select = st.sidebar.radio("메뉴를 골라주세요.", menu)
-
+    if select == 'SSD Test 영상':
+      st.title("SSD Test 영상")
+      blank = """ """
+      st.write(blank)
+      st.write(blank)
+      video_file_origin = open('menu/test_video/ssd_test_video_1.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
+      st.video(video_file_origin)
+      st.markdown("""###### ※본 영상은 직접 촬영한 영상입니다. AWS ec2의 프리티어 인스턴스 성능상 상호작용 가능한 형태로 구현 불가능하여 영상으로 대체되었습니다. 왼쪽 사이드바에서 메뉴를 선택해주세요.""")
+            
     if select == '원본 영상':
-      st.header("원본 영상")
+      st.title("원본 영상")
       video_file_origin = open('test_data/videos/origin1.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
       st.video(video_file_origin)
 
     elif select == 'Object Detection':
-        st.header("Object Detection")
+        st.title("Object Detection")
         video_file_convert = open('test_data/videos/convert1.mp4', 'rb').read()
         st.video(video_file_convert)

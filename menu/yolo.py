@@ -73,7 +73,7 @@ def about_yolo():
     text2 = """
         영역(grid cell)을 구분하면 영역 별로 결과가 나옵니다. 벡터가 여러 개 나온다는 겁니다.      
         최대로 그 영역의 갯수만큼 물체를 감지할 수 있게 됩니다.      
-        이제 한 이미지에 대한 y의 값이 (이미지의 가로 X 세로) X 벡터에 들어있는 정보 갯수 만큼 나옵니다.      
+        한 이미지에 대한 y의 값이 (이미지의 가로 X 세로) X 벡터에 들어있는 정보 갯수 만큼 나옵니다.      
         CNN을 마친 결과도 같은 모양으로 나옵니다.   """
 
 
@@ -89,9 +89,9 @@ def about_yolo():
         물체 별로 가장 큰 값을 남겨두는 것이 좋을 것 같습니다.
         이때 물체 별로 구분하기 위해 만들어진 지표를 IOU(=Intersection over union)라고 합니다.  
         바운딩 박스 간의 교집합 영역의 넓이 ÷ 합집합의 영역의 넓이입니다.   
-        간단히 말해서 그냥 겹치는 부분이 많은지 적은지 정도를 나타내는 것입니다.    
+        간단히 말해서 겹치는 부분이 많은지 적은지 정도를 나타내는 것입니다.    
         IOU 값이 클수록 같은 물체일 가능성이 큽니다.    
-        IOU가 높은 사각형들 중 pc값이 큰 것만 남기고 작은 것들은 싹 지우는 겁니다.  
+        IOU가 높은 사각형들 중 pc값이 큰 것만 남기고 작은 것들은 싹 지웁니다.    
         이걸 Non max suppression이라고 합니다.  """
 
     text5 = """
@@ -158,28 +158,26 @@ def about_yolo():
 #             st.image(result_image)
 
 def yolo_video():
-    st.title("YOLO 실행 영상")
-    video_file_origin = open('menu/test_video/yolo_test_video_1.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
-    st.video(video_file_origin)
-    st.markdown("""###### ※본 영상은 직접 촬영한 영상입니다. AWS ec2의 프리티어 인스턴스 성능상 상호작용 가능한 형태로 구현 불가능하여 영상으로 대체되었습니다. 왼쪽 사이드바에서 메뉴를 선택해주세요.""")
-    blank = """ """
-    st.write(blank)
-    st.write(blank)
-    st.write(blank)
-    st.write(blank)
-    st.write(blank)
-    st.write(blank)
-    st.write(blank)
+ 
 
-    menu = ['원본 영상', 'Object Detection']
+    menu = ['YOLO Test 영상', '원본 영상', 'Object Detection']
     select = st.sidebar.radio("메뉴를 골라주세요.", menu)
 
-    if select == '원본 영상':
-        st.header("원본 영상")
+    if select == 'YOLO Test 영상':
+        st.title("YOLO Test 영상")
+        blank = """ """
+        st.write(blank)
+        st.write(blank)
+        video_file_origin = open('menu/test_video/yolo_test_video_1.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
+        st.video(video_file_origin)
+        st.markdown("""###### ※본 영상은 직접 촬영한 영상입니다. AWS ec2의 프리티어 인스턴스 성능상 상호작용 가능한 형태로 구현 불가능하여 영상으로 대체되었습니다.""")
+    
+    elif select == '원본 영상':
+        st.title("원본 영상")
         video_file_origin = open('test_data/videos/origin3.mp4', 'rb').read()     #비디오 파일 읽어와라. 'rb'(어떤 용도로 읽어올 건지) 안써주면 안됨.
         st.video(video_file_origin)
 
     elif select == 'Object Detection':
-        st.header("Object Detection")
+        st.title("Object Detection")
         video_file_convert = open('test_data/videos/convert3.mp4', 'rb').read()
         st.video(video_file_convert)    

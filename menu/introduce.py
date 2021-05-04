@@ -78,5 +78,8 @@ def introduce():
     st.write(blank)
 
     st.title("SSD, YOLO, Semantic Segmentation")
+    st.write(blank)
+    st.write(blank)
+
     st.image('script/deep_learning_object_detection_history.png')
     st.write(text7)
